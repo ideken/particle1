@@ -5,29 +5,31 @@ void ofApp::setup(){
     ofBackground(63);
     ofSetFrameRate(60);
     ofSetCircleResolution(4);
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        particle[i].friction = 0.02;
-        particle[i].gravity.set(0, 0.25);
-        particle[i].setInit(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        particle[i].update();
+    for (int i = 0; i < particles.size(); i++) {
+        particles[i].update();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        particle[i].draw();
+    for (int i = 0; i < particles.size(); i++) {
+        particles[i].draw();
     }
+    ofDrawBitmapString("Particle Num = " + ofToString(particles.size()), ofPoint(10, 20));
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if (key == 'f') {
+        ofToggleFullscreen();
+    }
+    if (key == 'c') {
+        particles.clear();
+    }
 
 }
 
@@ -43,6 +45,15 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
+    Particle p;
+    p.friction = 0.01;
+    p.gravity.set(0, 0);
+    p.setInit(ofVec2f(x, y));
+    float length = ofRandom(3.0);
+    float angle = ofRandom(2*PI);
+    p.velocity.x = length * cos(angle);
+    p.velocity.y = length * sin(angle);
+    particles.push_back(p);
 
 }
 

@@ -19,7 +19,6 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    static const int CIRCLE_NUM = 1000;
-    Particle particle[CIRCLE_NUM];
+    vector <Particle> particles;
 		
 };
