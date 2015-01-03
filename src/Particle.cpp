@@ -20,7 +20,8 @@ void Particle::update(){
 //-------------------------------------------------
 
 void Particle::draw(){
-    ofCircle(position, 2);
+    ofSetColor(color);
+    ofCircle(position, 4);
 }
 
 //-------------------------------------------------
@@ -29,10 +30,15 @@ void Particle::setInit(ofVec2f _initPos){
     position.x = _initPos.x;
     position.y = _initPos.y;
     
-    float length = ofRandom(10.0);
-    float angle = ofRandom(2*PI);
-    velocity.x = length * cos(angle);
-    velocity.y = length * sin(angle);
+//    float length = ofRandom(8.0);
+//    float angle = ofRandom(2*PI);
+//    velocity.x = length * cos(angle);
+//    velocity.y = length * sin(angle);
+    
+//    color.r = ofRandom(200, 255);
+//    color.g = ofRandom(200, 255);
+//    color.b = ofRandom(200, 255);
+    
 }
 
 //-------------------------------------------------

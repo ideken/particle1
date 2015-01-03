@@ -30,6 +30,7 @@ public:
     ofVec2f force;
     ofVec2f gravity;
     float friction;
+    ofColor color;
     
 private:
     
