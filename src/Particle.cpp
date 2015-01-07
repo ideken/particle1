@@ -91,3 +91,38 @@ void Particle::constrain(int _minX, int _minY, int _maxX, int _maxY){
         position.y = _maxY + (_maxY - position.y);
     }
 }
+//-------------------------------------------------
+
+void Particle::addattraction(float _x, float _y, float _radius, float _scale){
+    ofVec2f gravityCenter;
+    gravityCenter.set(_x, _y);
+    float distance = (gravityCenter - position).length();
+    bool isCloseEnough = true;
+    if(_radius > 0){
+        if (distance > _radius) {
+            isCloseEnough = false;
+        }
+    }
+    if (isCloseEnough) {
+        float ratio = 1 - (distance / _radius);
+        force -= force * distance * _scale * ratio;
+    }
+    
+
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

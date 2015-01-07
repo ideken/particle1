@@ -4,15 +4,24 @@
 void ofApp::setup(){
     ofBackground(0);
     ofSetFrameRate(60);
-    ofSetCircleResolution(4);
 //    ofSetBackgroundAuto(false);
     mesh.setMode(OF_PRIMITIVE_POINTS);
+    glPointSize(1.0);
+    
+    for (int i = 0; i < NUM; i++) {
+        Particle p;
+        p.friction = 0.002;
+        p.setInit(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())));
+        particles.push_back(p);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     for (int i = 0; i < particles.size(); i++) {
-        particles[i].update();
+        particles[i].resetForce();
+        particles[i].addattraction(mouseX, mouseY, ofGetWidth(), 0.1);
+        particles[i].updatePos();
     }
 }
 
@@ -25,6 +34,7 @@ void ofApp::draw(){
 //    ofNoFill();
 
     mesh.clear();
+    ofSetColor(255);
     for (int i = 0; i < particles.size(); i++) {
         mesh.addVertex(ofVec3f(particles[i].position.x, particles[i].position.y,0));
     }
@@ -37,9 +47,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == 'f') {
-        ofToggleFullscreen();
-    }
+
     if (key == 'c') {
         particles.clear();
     }
@@ -77,12 +85,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    existAttraction = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    existAttraction = false;
 }
 
 //--------------------------------------------------------------

@@ -23,6 +23,8 @@ public:
     void updatePos();
     void checkBounds(int minX, int minY, int maxX, int maxY);
     void constrain(int minX, int minY, int maxX, int maxY);
+    void addattraction(float x, float y, float radius, float scale);
+    
     
     //property
     ofVec2f position;
